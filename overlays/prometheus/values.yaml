@@ -1,0 +1,7 @@
+prometheus:
+  alertmanager:
+    persistentVolume:
+      enabled: false
+  server:
+    persistentVolume: 
+      enabled: false

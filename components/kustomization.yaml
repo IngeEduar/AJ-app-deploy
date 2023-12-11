@@ -6,3 +6,4 @@ resources:
   - server/service.yaml
   - web-server/deployment.yaml
   - web-server/service.yaml
+  - web-server/ingress.yaml
