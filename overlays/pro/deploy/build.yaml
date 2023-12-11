@@ -4,9 +4,8 @@ metadata:
   name: pro-api-service
 spec:
   ports:
-  - port: 80
+  - port: 8080
     protocol: TCP
-    targetPort: 5000
   selector:
     app: api-pod
   type: NodePort
