@@ -12,9 +12,9 @@ spec:
   template:
     metadata:
       name: api-python
-      labels.:
+      labels:
         app: api-pod
     spec:
       containers:
-        - image: ingeeduar/ajpython:1.0.1-22
+        - image: ingeeduar/ajpython:1.0.1-23
           name: api-container
