@@ -1,6 +1,6 @@
 apiVersion: v1
 data:
-  nginx.conf: "upstream backend { \n    server http://pro-api-service.pro.svc.cluster.local:8000;\n};\n\nserver
+  nginx.conf: "upstream backend { \n    server pro-api-service.pro.svc.cluster.local:8000;\n};\n\nserver
     {\n    listen 443 ssl;\n    server_name localhost;\n\n    ssl_certificate /etc/nginx/ssl/tls.crt;\n
     \   ssl_certificate_key /etc/nginx/ssl/tls.key;\n\n    ssl_protocols TLSv1.2 TLSv1.3;\n\n
     \   location / {\n        proxy_pass http://backend-server;\n    }\n\n    location
