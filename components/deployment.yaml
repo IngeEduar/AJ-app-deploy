@@ -16,5 +16,5 @@ spec:
         app: api-pod
     spec:
       containers:
-        - image: ingeeduar/ajpython:1.0.1-24
+        - image: ingeeduar/ajpython:1.0.1-25
           name: api-container
