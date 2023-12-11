@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+  labels:
+    app: web-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-pod
+  template:
+    metadata:
+      name: web-python
+      labels:
+        app: web-pod
+    spec:
+      containers:
+        - image: nginx
+          name: web-container
+          volumeMounts:
+            - name: nginx-server
+              mountPath: /etc/nginx/conf.d
+            - name: nginx-ssl
+              mountPath: /etc/nginx/ssl
+      volumes:
+        - name: nginx-server
+          configMap:
+            name: cm-nginx-server
+        - name: nginx-ssl
+          secret:
+            secretName: s-nginx-ssl
