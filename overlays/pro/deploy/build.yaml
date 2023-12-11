@@ -4,7 +4,7 @@ metadata:
   name: pro-api-service
 spec:
   ports:
-  - port: 8080
+  - port: 8000
     protocol: TCP
   selector:
     app: api-pod
