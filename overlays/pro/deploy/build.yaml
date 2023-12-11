@@ -1,4 +1,86 @@
 apiVersion: v1
+data:
+  nginx.conf: "upstream backend { \n    server http://pro-api-service.pro.svc.cluster.local:8000;\n};\n\nserver
+    {\n    listen 443 ssl;\n    server_name localhost;\n\n    ssl_certificate /etc/nginx/ssl/tls.crt;\n
+    \   ssl_certificate_key /etc/nginx/ssl/tls.key;\n\n    ssl_protocols TLSv1.2 TLSv1.3;\n\n
+    \   location / {\n        proxy_pass http://backend-server;\n    }\n\n    location
+    ~ /\\.ht {\n        deny all;\n    }\n}\n"
+kind: ConfigMap
+metadata:
+  name: pro-cm-nginx-server-dg68c6g944
+---
+apiVersion: v1
+data:
+  tls.crt: |
+    LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVHVENDQXdHZ0F3SUJBZ0lVZFJMSE
+    lSNTZkN0tFVFRJN0RWTDAwdmRaOURvd0RRWUpLb1pJaHZjTkFRRUwKQlFBd2dac3hDekFK
+    QmdOVkJBWVRBa05QTVJzd0dRWURWUVFJREJKT2IzSjBaU0JrWlNCellXNTBZVzVrWlhJeA
+    pFakFRQmdOVkJBY01DVVBEZzhLNlkzVjBZVEVPTUF3R0ExVUVDZ3dGUkdWMmN5QXhEVEFM
+    QmdOVkJBc01CRVJsCmRuTXhFakFRQmdOVkJBTU1DV3h2WTJGc2FHOXpkREVvTUNZR0NTcU
+    dTSWIzRFFFSkFSWVplR0YyYVdWeVlYWmwKYm1SaGJtODVRR2R0WVdsc0xtTnZiVEFlRncw
+    eU16RXlNVEV4T0RBek5EQmFGdzB5TkRFeU1UQXhPREF6TkRCYQpNSUdiTVFzd0NRWURWUV
+    FHRXdKRFR6RWJNQmtHQTFVRUNBd1NUbTl5ZEdVZ1pHVWdjMkZ1ZEdGdVpHVnlNUkl3CkVB
+    WURWUVFIREFsRHc0UEN1bU4xZEdFeERqQU1CZ05WQkFvTUJVUmxkbk1nTVEwd0N3WURWUV
+    FMREFSRVpYWnoKTVJJd0VBWURWUVFEREFsc2IyTmhiR2h2YzNReEtEQW1CZ2txaGtpRzl3
+    MEJDUUVXR1hoaGRtbGxjbUYyWlc1awpZVzV2T1VCbmJXRnBiQzVqYjIwd2dnRWlNQTBHQ1
+    NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUUN0ClR0U2pOK2EyTm5NamEwYjdM
+    UlVJTE9vbmoxT24yMDc1bDlZMEZ1VTZycE8vYklpT0VkZEYyampSazVkVytuVXkKeTlwTz
+    dTN3Q0VjQzVEhlV1hkek1sQ3NVYThYeWM0TGUyN1BOTy9SaVlNZFBXeXhKUVFjVVE1NERi
+    bmR2V1JWQgp0YjVhby8zY0NMcFhhUGdiYXdudlF3M2pKMzdMN1lPdzRJaHhmMHA4S3YxZE
+    0rL3B0S25Qd2s3bGZJVDlNK0lGCnNnUEUxSUVHdy9LYUhDWmlSMFdTQkR3WU8zRHhuSzVQ
+    K041c0tsQ0ZmYlZhM3MxSHZlWVYyaHJSMnRIRElXK2YKSDBBK1FHSGthcXRLeGUwcnQ4Lz
+    lwVzNicjdnYU82Y0l2UzBTMDRvWlovRGE0dUdJbTZwSEpRbFFNRzhKa1dQRQpUdDVZcDJF
+    UzNKM29tOXl0VUE4WkFnTUJBQUdqVXpCUk1CMEdBMVVkRGdRV0JCUUFUaVlPOTZpWDJtZy
+    tjYTNiClNRQVY1eVlCZHpBZkJnTlZIU01FR0RBV2dCUUFUaVlPOTZpWDJtZytjYTNiU1FB
+    VjV5WUJkekFQQmdOVkhSTUIKQWY4RUJUQURBUUgvTUEwR0NTcUdTSWIzRFFFQkN3VUFBNE
+    lCQVFCelRHV0RXbW9QOWhYcGE5SVFCTDM2UlRZTgpKRXVCWVFLVG5xWDNtR3d2NktUdWsr
+    cTIzRXdzeG4yR1ZlMVV5M2txNEgyM3UxQU93bHJxREVJdkF1UkVJems1CmRaODg0bUxjdm
+    ZHNWpXVjN6VHB1YW1GRmZMa2VabGttUVp1NG9LOHdpQjZOckJPVEZrMk1YeTA3VmFXQzNW
+    YysKZlZhMzc1aDA4R05tWE1WSFpHK25WL1JRL3duazFENEpyOWhlYUVIK3VWYlRLdW4xZU
+    0rR0hhTHY3Sk5uOFRHNQpucXlSUmY2dFZKek1vT0xHTm5OVThvc0VmVysrQW43SmNaUkcv
+    UEU0R0tZc3Q3UExUME9zdUFENHNmZk1Jdm5RCkFJYzBNWVpiRjF5a1ptejhDc0ZpcHZvLz
+    hiTTNlOEZEMXBKRjJUd1NuYmp4NllHME9NTStxSjRFT0RmRwotLS0tLUVORCBDRVJUSUZJ
+    Q0FURS0tLS0tCg==
+  tls.key: |
+    LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2UUlCQURBTkJna3Foa2lHOXcwQk
+    FRRUZBQVNDQktjd2dnU2pBZ0VBQW9JQkFRQ3RUdFNqTithMk5uTWoKYTBiN0xSVUlMT29u
+    ajFPbjIwNzVsOVkwRnVVNnJwTy9iSWlPRWRkRjJqalJrNWRXK25VeXk5cE83Uzd0NFY0Mw
+    pUSGVXWGR6TWxDc1VhOFh5YzRMZTI3UE5PL1JpWU1kUFd5eEpRUWNVUTU0RGJuZHZXUlZC
+    dGI1YW8vM2NDTHBYCmFQZ2Jhd252UXczakozN0w3WU93NEloeGYwcDhLdjFkTSsvcHRLbl
+    B3azdsZklUOU0rSUZzZ1BFMUlFR3cvS2EKSENaaVIwV1NCRHdZTzNEeG5LNVArTjVzS2xD
+    RmZiVmEzczFIdmVZVjJoclIydEhESVcrZkgwQStRR0hrYXF0Swp4ZTBydDgvOXBXM2JyN2
+    dhTzZjSXZTMFMwNG9aWi9EYTR1R0ltNnBISlFsUU1HOEprV1BFVHQ1WXAyRVMzSjNvCm05
+    eXRVQThaQWdNQkFBRUNnZ0VBVVZyQ2hiWU5wdmFMZVJKNFdSdHlGb3JqQmx3SlJMQTE5QU
+    9iU1l0LzR0cWwKdjhQbW5HNXlsRGRhMmNMRFZkQ3ZxSDg2UlRlaEFvajdUZEVuQ0I2YXNp
+    eFJ4cjNLeDhRQ3FMUVF4T1NDbFpYaApxZlplSlNzUjlDakRxYysyNEQyOHRVSm9ENnVRMV
+    RRQnFWdThzRDVBaFNFQWlXUDJhU3RmV080bURzVld4VTh2CkFSWTBKSXp6WFdZRFB2TnRG
+    UUJJVlEzSjR5dVdid2pBMW5FZGZycEF0cUt2emZQU05wRWFGZWVnOWs3ckVHY0UKaU9FVV
+    dWczhXMGZmYmh2VEtIRjhKM0VicUZIVHdFUldrTlJHTzZUNzd5YXd4eVVrem94UFVVcVky
+    aDl3Q0ZubQp3NnVlT0huQnk1cDRNYm1keDQwOTk4ajhCbUdiQWxMV2pWTTY3eGhZNHdLQm
+    dRQzFxMHNTU1g1VHJ2QmRuOTVqCmhQS055azJTYmNkS3hnZW52UDJQSlp2dUY5eFpJSGxt
+    MVBTc2k2NkQvTTVHemhnenp2UDRST09LQ1NWSE8zeVEKa2NWSFJ5REJRbW5EM1BYaGlTcE
+    hERHhLWWlzbkZiOUprSFo5RVE3cnhGN3JXeEw5cXRna2pUR291a2c0NVQvbQp2SFdleWsy
+    YnF6T2FEa2NJclFWY1Y4VFBNd0tCZ1FEME44RjBTTjMraVJkRkh5SnZSU2pWSTJlL0xHal
+    B5ODJuCjVlK3dPelBqNWxJZktyeTd1ZmFab1Vza0J0N0dUcVMxK2NMcjI1V0tjdTV0eHRS
+    RjdPWk9nWGNYWW1rbGFFQ3oKMUF5ZU94MmNpQVY5OXlmeWxrSnF2VS9RMGwzQWZnQWxsc3
+    hacnZpSTZ2WW5jOWxkcnJBU05NWThLK0o2Lzl2dAppNDZrMUIzWWd3S0JnUUNtQnRQbTlJ
+    K2svdjNoTXBmVnI4elVWSXlzUS9PY25IcW1pNHZYWlBHcW1OZmlCRkd1Cjd2UmxOSXJiU1
+    JGam1EcDZMcXE4dklpT3dHajNQcUJLcDAzNkpFRUZIaUwydzF0Yk1UWVlGRkNOVWtaSnhC
+    QTcKdFBEMHY4QTVMQS9yWENKdy9jL25KN3E0anZZdU9TVTdSQVRpaDlTQmJlY001ZnQ1TE
+    ZiMzI2YWNEUUtCZ0JBWgpITWR0aGpTaEZNZVpwY3R2NDZFcEZFMmx2OEx5ekR1bERJZXhY
+    MXBHZEdOWmpkZFNDczlWc241TmRhSGN6VDZ4Cm1BZTBFY2R1akFqd2NrMnBzQVM4dy96bW
+    44ZTNkNHhqRGZIZ003Tjl3OTdweTloUnowNzU2Nmo0TlBYYldHY2gKNlpaLzBpSTBXc1Yr
+    L1hVUGJzdkVic3pJbDhWRDJGdHdONWJsNUpIQkFvR0FHZWNSb2RUbnFNak0yanJXNGZsTQ
+    o3Sk1wYTA4emVSNmdUUnBOOUxpRE9yb0wzMkpRWXVBMW8rU3krdTZJQWdSdldZczRLQ1RV
+    clRHZlJBaEplVklnCmI4U0NCUDNZQWdXeFhJbmNBdFpmdUFqMEptRS9rOS9HZHYrKzdScW
+    RKQzFIdTRwSFdrMmNOZGpCdWJ1ZVpzcEgKYjhQc2F0amo1b1NPOGVGYWdhbkNMeHc9Ci0t
+    LS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K
+kind: Secret
+metadata:
+  name: pro-s-nginx-ssl-h55969f9fk
+type: kubernetes.io/tls
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: pro-api-service
@@ -10,10 +92,22 @@ spec:
     app: api-pod
   type: NodePort
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pro-web-service
+spec:
+  ports:
+  - port: 443
+    protocol: TCP
+  selector:
+    app: web-pod
+  type: NodePort
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels.:
+  labels:
     app: api-deployment
   name: pro-api-deployment
 spec:
@@ -30,3 +124,36 @@ spec:
       containers:
       - image: ingeeduar/ajpython:1.0.1-25
         name: api-container
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web-deployment
+  name: pro-web-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-pod
+  template:
+    metadata:
+      labels:
+        app: web-pod
+      name: web-python
+    spec:
+      containers:
+      - image: nginx
+        name: web-container
+        volumeMounts:
+        - mountPath: /etc/nginx/conf.d
+          name: nginx-server
+        - mountPath: /etc/nginx/ssl
+          name: nginx-ssl
+      volumes:
+      - configMap:
+          name: pro-cm-nginx-server-dg68c6g944
+        name: nginx-server
+      - name: nginx-ssl
+        secret:
+          secretName: pro-s-nginx-ssl-h55969f9fk
