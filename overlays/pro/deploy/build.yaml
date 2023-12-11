@@ -24,7 +24,7 @@ spec:
       app: api-pod
   template:
     metadata:
-      labels.:
+      labels:
         app: api-pod
       name: api-python
     spec:
