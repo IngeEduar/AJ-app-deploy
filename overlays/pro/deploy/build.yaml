@@ -29,5 +29,5 @@ spec:
       name: api-python
     spec:
       containers:
-      - image: ingeeduar/ajpython:1.0.1-22
+      - image: ingeeduar/ajpython:1.0.1-23
         name: api-container
