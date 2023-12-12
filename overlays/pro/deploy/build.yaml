@@ -118,9 +118,11 @@ metadata:
   namespace: pro
 spec:
   ports:
-  - port: 443
+  - name: https
+    port: 443
     protocol: TCP
-  - port: 80
+  - name: http
+    port: 80
     protocol: TCP
   selector:
     app: web-pod
