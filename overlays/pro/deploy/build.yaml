@@ -5,10 +5,12 @@ data:
     \   ssl_certificate_key /etc/nginx/ssl/tls.key;\n\n    ssl_protocols TLSv1.2 TLSv1.3;\n\n
     \   location / {\n        proxy_pass http://backend;\n    }\n\n    location ~
     /\\.ht {\n        deny all;\n    }\n\n    location /nginx_status {\n        stub_status;\n
+    \       access_log off;\n        allow all;\n    }\n}\n\nserver {\n    listen
+    80;\n    server_name localhost;\n\n    location /nginx_status {\n        stub_status;\n
     \       access_log off;\n        allow all;\n    }\n}\n"
 kind: ConfigMap
 metadata:
-  name: pro-cm-nginx-server-bdfhf29tfh
+  name: pro-cm-nginx-server-hbmf4ddh94
   namespace: pro
 ---
 apiVersion: v1
@@ -118,6 +120,8 @@ spec:
   ports:
   - port: 443
     protocol: TCP
+  - port: 80
+    protocol: TCP
   selector:
     app: web-pod
   type: NodePort
@@ -162,7 +166,7 @@ spec:
       containers:
       - args:
         - -nginx.scrape-uri
-        - https://pro-web-service.pro.svc.cluster.local/nginx_status
+        - http://pro-web-service.pro.svc.cluster.local/nginx_status
         image: nginx/nginx-prometheus-exporter:0.10.0
         name: nginx-exporter
         ports:
@@ -196,7 +200,7 @@ spec:
           name: nginx-ssl
       volumes:
       - configMap:
-          name: pro-cm-nginx-server-bdfhf29tfh
+          name: pro-cm-nginx-server-hbmf4ddh94
         name: nginx-server
       - name: nginx-ssl
         secret:
