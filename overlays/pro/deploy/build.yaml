@@ -6,11 +6,19 @@ data:
     \   location / {\n        proxy_pass http://backend;\n    }\n\n    location ~
     /\\.ht {\n        deny all;\n    }\n\n    location /nginx_status {\n        stub_status;\n
     \       access_log off;\n        allow all;\n    }\n}\n\nserver {\n    listen
-    80;\n    server_name localhost;\n\n    location /nginx_status {\n        stub_status;\n
-    \       access_log off;\n        allow all;\n    }\n}\n"
+    80;\n    server_name localhost;\n\n    log_format json escape=json '{ \"time_local\":
+    \"$time_local\", \"remote_addr\": \"$remote_addr\", \"remote_user\": \"$remote_user\",
+    \"request\": \"$request\", \"status\": \"$status\", \"body_bytes_sent\": \"$body_bytes_sent\",
+    \"http_referer\": \"$http_referer\", \"http_user_agent\": \"$http_user_agent\"
+    }';\n    access_log /var/log/nginx/access.json json;\n    error_log /var/log/nginx/error.log;\n\n
+    \   location /nginx_status {\n        stub_status;\n        access_log off;\n
+    \       allow all;\n    }\n\n    location /nginx_logs {\n        default_type
+    application/json;\n        alias /var/log/nginx/access.json;\n    }\n\n    location
+    /nginx_errors {\n        default_type application/json;\n        alias /var/log/nginx/error.log;\n
+    \   }\n}\n"
 kind: ConfigMap
 metadata:
-  name: pro-cm-nginx-server-hbmf4ddh94
+  name: pro-cm-nginx-server-84d5t5b72h
   namespace: pro
 ---
 apiVersion: v1
@@ -202,7 +210,7 @@ spec:
           name: nginx-ssl
       volumes:
       - configMap:
-          name: pro-cm-nginx-server-hbmf4ddh94
+          name: pro-cm-nginx-server-84d5t5b72h
         name: nginx-server
       - name: nginx-ssl
         secret:
