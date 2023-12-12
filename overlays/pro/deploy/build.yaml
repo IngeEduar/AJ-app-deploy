@@ -176,8 +176,10 @@ spec:
       - args:
         - -nginx.scrape-uri
         - http://pro-web-service.pro.svc.cluster.local/nginx_status
-        - -nginx.scrape-uri
-        - http://pro-web-service.pro.svc.cluster.local/nginx_logs
+        - -nginx.log-format
+        - json
+        - -nginx.log-metrics
+        - nginx_logs
         image: nginx/nginx-prometheus-exporter:0.10.0
         name: nginx-exporter
         ports:
