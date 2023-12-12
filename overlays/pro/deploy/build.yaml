@@ -4,10 +4,11 @@ data:
     {\n    listen 443 ssl;\n    server_name localhost;\n\n    ssl_certificate /etc/nginx/ssl/tls.crt;\n
     \   ssl_certificate_key /etc/nginx/ssl/tls.key;\n\n    ssl_protocols TLSv1.2 TLSv1.3;\n\n
     \   location / {\n        proxy_pass http://backend;\n    }\n\n    location ~
-    /\\.ht {\n        deny all;\n    }\n}\n"
+    /\\.ht {\n        deny all;\n    }\n\n    location /metrics {\n        stub_status;\n
+    \       access_log off;\n    }\n}\n"
 kind: ConfigMap
 metadata:
-  name: pro-cm-nginx-server-5mg92d5b4t
+  name: pro-cm-nginx-server-2699868ft6
   namespace: pro
 ---
 apiVersion: v1
@@ -157,7 +158,7 @@ spec:
           name: nginx-ssl
       volumes:
       - configMap:
-          name: pro-cm-nginx-server-5mg92d5b4t
+          name: pro-cm-nginx-server-2699868ft6
         name: nginx-server
       - name: nginx-ssl
         secret:
