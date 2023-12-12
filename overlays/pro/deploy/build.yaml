@@ -14,12 +14,12 @@ data:
     /\\.ht {\n        deny all;\n    }\n\n    location /nginx_status {\n        stub_status;\n
     \       access_log off;\n        allow all;\n    }\n}\n\nserver {\n    listen
     80;\n    server_name localhost;\n\n    location /nginx_status {\n        stub_status;\n
-    \       access_log off;\n        allow all;\n    }\n\n    # location /nginx_logs
-    {\n    #     default_type application/json;\n    #     access_log off;\n    #
-    \    allow all;\n    #     alias /var/log/nginx/access.json;\n    # }\n}\n"
+    \       access_log off;\n        allow all;\n    }\n\n    location /nginx_logs
+    {\n        default_type application/json;\n        access_log off;\n        allow
+    all;\n        alias /var/log/nginx/access.json;\n    }\n}\n"
 kind: ConfigMap
 metadata:
-  name: pro-cm-nginx-server-fbmk7fd886
+  name: pro-cm-nginx-server-68dtf5bb5c
   namespace: pro
 ---
 apiVersion: v1
@@ -211,7 +211,7 @@ spec:
           name: nginx-ssl
       volumes:
       - configMap:
-          name: pro-cm-nginx-server-fbmk7fd886
+          name: pro-cm-nginx-server-68dtf5bb5c
         name: nginx-server
       - name: nginx-ssl
         secret:
