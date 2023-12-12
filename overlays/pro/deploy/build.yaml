@@ -174,7 +174,6 @@ spec:
     spec:
       containers:
       - args:
-        - -log.level=info
         - -nginx.scrape-uri
         - http://pro-web-service.pro.svc.cluster.local/nginx_status
         image: nginx/nginx-prometheus-exporter:0.10.0
