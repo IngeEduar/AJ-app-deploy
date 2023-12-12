@@ -176,9 +176,7 @@ spec:
       - args:
         - -nginx.scrape-uri
         - http://pro-web-service.pro.svc.cluster.local/nginx_status
-        - -nginx.log-urls
-        - http://pro-web-service.pro.svc.cluster.local/nginx_logs
-        image: mikroways/nginx-prometheus-exporter:0.8.0
+        image: nginx/nginx-prometheus-exporter:0.10.0
         name: nginx-exporter
         ports:
         - containerPort: 9113
