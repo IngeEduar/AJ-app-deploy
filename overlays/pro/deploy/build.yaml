@@ -98,6 +98,20 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: pro-nginx-exporter-service
+  namespace: pro
+spec:
+  ports:
+  - port: 9113
+    protocol: TCP
+    targetPort: 9113
+  selector:
+    app: nginx-exporter
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: pro-web-service
   namespace: pro
 spec:
@@ -129,6 +143,30 @@ spec:
       containers:
       - image: ingeeduar/ajpython:1.0.1-25
         name: api-container
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pro-nginx-exporter
+  namespace: pro
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-exporter
+  template:
+    metadata:
+      labels:
+        app: nginx-exporter
+    spec:
+      containers:
+      - args:
+        - -nginx.scrape-uri
+        - http://pro-web-service.pro.svc.cluster.local/nginx_status
+        image: nginx/nginx-prometheus-exporter:0.10.0
+        name: nginx-exporter
+        ports:
+        - containerPort: 9113
 ---
 apiVersion: apps/v1
 kind: Deployment
