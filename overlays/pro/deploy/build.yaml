@@ -160,7 +160,10 @@ spec:
         app: nginx-exporter
     spec:
       containers:
-      - image: nginx/nginx-prometheus-exporter:0.10.0
+      - args:
+        - -nginx.scrape-uri
+        - https://pro-web-service.pro.svc.cluster.local/nginx_status
+        image: nginx/nginx-prometheus-exporter:0.10.0
         name: nginx-exporter
         ports:
         - containerPort: 9113
