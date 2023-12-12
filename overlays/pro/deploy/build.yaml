@@ -6,7 +6,7 @@ data:
     \"$http_referer\", \"http_user_agent\": \"$http_user_agent\" }';\n# access_log
     /var/log/nginx/access.json json;\n# error_log /var/log/nginx/error.log;\n\nlog_format
     prometheus '$remote_addr - $remote_user [$time_local] \"$request\" $status $body_bytes_sent
-    \"$http_referer\" \"$http_user_agent\"';\naccess_log /var/log/nginx/access.log
+    \"$http_referer\" \"$http_user_agent\"';\naccess_log /var/log/nginx/access.json
     prometheus;\n\nupstream backend { \n    server pro-api-service.pro.svc.cluster.local:8000;\n}\n\nserver
     {\n    listen 443 ssl;\n    server_name localhost;\n\n    ssl_certificate /etc/nginx/ssl/tls.crt;\n
     \   ssl_certificate_key /etc/nginx/ssl/tls.key;\n\n    ssl_protocols TLSv1.2 TLSv1.3;\n\n
@@ -19,7 +19,7 @@ data:
     all;\n        alias /var/log/nginx/access.json;\n    }\n}\n"
 kind: ConfigMap
 metadata:
-  name: pro-cm-nginx-server-68dtf5bb5c
+  name: pro-cm-nginx-server-54b2dh46b7
   namespace: pro
 ---
 apiVersion: v1
@@ -211,7 +211,7 @@ spec:
           name: nginx-ssl
       volumes:
       - configMap:
-          name: pro-cm-nginx-server-68dtf5bb5c
+          name: pro-cm-nginx-server-54b2dh46b7
         name: nginx-server
       - name: nginx-ssl
         secret:
